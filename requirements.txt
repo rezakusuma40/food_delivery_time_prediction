@@ -1,3 +1,6 @@
 pillow==10.4.0
 streamlit==1.41.1
 joblib==1.4.2
+pandas==2.1.1
+numpy==1.26.1
+scikit-learn==1.5.1
