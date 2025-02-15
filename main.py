@@ -12,7 +12,7 @@ def predict_delivery_time(features):
   return prediction[0]
 
 # ---- UI ----
-st.set_page_config(page_title="Food Delivery Prediction", page_icon="🍕", layout="centered")
+st.set_page_config(page_title="Food Delivery Prediction", page_icon='random', layout="centered")
 
 st.image("assets/food-delivery-service2.jpg", use_container_width=True)
 st.title("🚀 Prediksi Waktu Pengiriman Makanan")
