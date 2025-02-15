@@ -5,7 +5,7 @@ import random
 
 # Load model & scaler
 model = joblib.load('delivery_time_model.pkl')
-scaler = joblib.load('scaler.pkl')
+# scaler = joblib.load('scaler.pkl')
 
 # Fungsi prediksi
 def predict_delivery_time(features):
@@ -75,10 +75,10 @@ weather_encoded = weather_mapping[weather]
 
 # Standarisasi fitur numerik
 numerical_features = np.array([[distance, prep_time, courier_exp]])
-numerical_features_standardized = scaler.transform(numerical_features)[0]
+# numerical_features_standardized = scaler.transform(numerical_features)[0]
 
 # Gabungkan semua fitur
-features = list(numerical_features_standardized) + [traffic_encoded] + time_encoded + vehicle_encoded + weather_encoded
+features = list(numerical_features) + [traffic_encoded] + time_encoded + vehicle_encoded + weather_encoded
 
 st.markdown("---")
 
