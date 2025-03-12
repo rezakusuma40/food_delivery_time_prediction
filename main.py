@@ -6,6 +6,9 @@ import random
 # Load model
 model = joblib.load('delivery_time_model.pkl')
 
+# Load scaler
+scaler = joblib.load('scaler.pkl')
+
 # Fungsi prediksi
 def predict_delivery_time(features):
   prediction = model.predict([features])
@@ -65,13 +68,15 @@ vehicle_encoded = vehicle_mapping[vehicle_type]
 weather_mapping = {"Foggy": [1, 0, 0, 0], "Rainy": [0, 1, 0, 0], "Snowy": [0, 0, 1, 0], "Windy": [0, 0, 0, 1], "Clear": [0, 0, 0, 0]}
 weather_encoded = weather_mapping[weather]
 
-# Gunakan fitur numerik tanpa scaling
-features = [distance, prep_time, courier_exp] + [traffic_encoded] + time_encoded + vehicle_encoded + weather_encoded
+# Gabungkan fitur numerik dan kategorikal sebelum scaling
+features = np.array([[distance, prep_time, courier_exp, traffic_encoded] + vehicle_encoded + weather_encoded + time_encoded])
 
-st.markdown("---")
+# Lakukan scaling hanya pada fitur numerik
+features[:, :3] = scaler.transform(features[:, :3])
 
+# Prediksi
 if st.button("🚀 Prediksi Waktu Pengiriman"):
-  result = predict_delivery_time(features)
+  result = predict_delivery_time(features[0])
   st.success(f"📦 Perkiraan waktu pengiriman: **{result:.2f} menit**")
 
 st.markdown("---")
